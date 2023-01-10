@@ -1,12 +1,12 @@
 body {
   margin: 0;
-  padding: 0;
-  height: 100%;
   padding: 25px;
+  height: 100%;
   background-color: #363942;
 }
 
-.App {
-  font-family: sans-serif;
-  text-align: center;
+@media only screen and (max-width: 600px) {
+  body {
+    padding: 15px;
+  }
 }

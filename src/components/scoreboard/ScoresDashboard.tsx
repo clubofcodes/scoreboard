@@ -16,10 +16,9 @@ import PlayersList from "components/playerslist/PlayersList";
 
 // -------------------- Custom Style using styled-component --------------------
 const DashboardContainer = styled.div`
-    border-radius: 10px;
-    background-color: white;
-    padding: 5px 20px;
-  `;
+  border-radius: 14px;
+  background-color: ${props => props.theme.colors.listBg};
+`;
 // -------------------- Custom Style using styled-component --------------------
 
 // JSX function starts from here

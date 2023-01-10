@@ -1,8 +1,8 @@
 export const COLORS = {
     mainBg: '#363942',
+    listBg: '#f7f4f6',
+    white: 'white',
     text: 'black',
-    borderColor: 'red',
-    primary: 'rebeccapurple',
 };
 
 /**
@@ -21,3 +21,5 @@ export const isEmpty = (checkValue) => {
         checkValue.length === 0 ||
         Object.keys(checkValue).length === 0)
 };
+
+export const GRAY_IMG_URL = 'https://wallpaperaccess.com/full/1285952.jpg';

@@ -157,7 +157,7 @@ const PlayersList = (props: PlayersListProps): JSX.Element => {
 
   return (
     <ListGroup>
-      {streamersList?.map((streamer, index) => (
+      {streamersList?.sort((a, b) => a.score !== b.score ? b.score - a.score : a.score - b.score).map((streamer, index) => (
         <List key={streamer?.userID || index}>
           <StreamerInfo>
             <Badge id={`u-${index + 1}`}>{index + 1}</Badge>

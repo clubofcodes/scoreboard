@@ -1,13 +1,13 @@
 // React library and hooks API
 import React, { useEffect, useState } from "react";
 
-// styled-component library for designing components
+// Styled-component library for designing components
 import styled from "styled-components";
 
 // JSON data
 import streamersData from "assets/data/streamers.json";
 
-// Utils
+// Utils and Global Constants
 import { StreamersTypes } from "utils/globalTypes";
 import { isEmpty } from "utils/constants";
 

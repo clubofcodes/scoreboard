@@ -1,14 +1,18 @@
 // React library and hooks API
-import AnimationSlide from "components/animation/AnimationSlide";
-import useSystemInfo from "hooks/useSystemInfo";
-import React, { createRef, useEffect, useRef } from "react";
+import React, { createRef } from "react";
 
-// styled-component library for designing components
+// Styled-component library for designing components
 import styled from "styled-components";
-import { GreyImgUrl, DeviceWidth } from "utils/constants";
 
-// Global Types
+// Utils and Global Constants
+import { GreyImgUrl, DeviceWidth } from "utils/constants";
 import { StreamersTypes } from "utils/globalTypes";
+
+// Custom hook to fetch device type
+import useSystemInfo from "hooks/useSystemInfo";
+
+// Animation JS component wrapper
+import AnimationSlide from "components/animation/AnimationSlide";
 
 // -------------------- Custom Style using styled-component --------------------
 const ListGroup = styled.ul`
@@ -16,6 +20,7 @@ const ListGroup = styled.ul`
   list-style-type: none;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 `;
 
 const List = styled.li`
@@ -30,7 +35,7 @@ const List = styled.li`
   }
   
   @media only screen and ${DeviceWidth.m}{
-    padding: 5px 10px;
+    padding: 8px 15px;
   }
 
   &:hover {

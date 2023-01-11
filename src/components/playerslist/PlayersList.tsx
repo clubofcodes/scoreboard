@@ -166,46 +166,6 @@ const PlayersList = (props: PlayersListProps): JSX.Element => {
   // Destructuring required variable from object return by custom hook.
   let { desktopView } = useSystemInfo();
 
-  // useEffect(() => {
-  //   const countEl = document.querySelectorAll('.count');
-
-  //   countEl.forEach((item:any, i) => {
-  //     const fixedItemCount = item.getAttribute('data-count');
-
-  //    item.innerHTML = fixedItemCount;
-
-  //   })
-
-  //   console.log('inc', 'w');
-
-  // }, [streamersList])
-
-  // useEffect(() => {
-  //   const counters = document.querySelectorAll(".count");
-  //   const speed = 200;
-
-  //   if (streamersList.length > 0) {
-  //     counters.forEach((counter) => {
-  //       const updateCount = () => {
-  //         const target: any = counter.getAttribute("data-count");
-  //         const count: any = counter.innerHTML;
-  //         const increment = Math.trunc(target / speed);
-  //         // console.log(increment);
-  //         console.log(target, 'target');
-
-  //         if (parseInt(count) < parseInt(target)) {
-  //           counter.innerHTML = count + increment;
-  //           setTimeout(updateCount, 1);
-  //         } else {
-  //           count.innerHTML = target;
-  //         }
-  //       };
-  //       updateCount();
-  //     });
-  //   }
-
-  // }, [streamersList]);
-
   return (
     <ListGroup>
       <AnimationSlide>
@@ -217,7 +177,6 @@ const PlayersList = (props: PlayersListProps): JSX.Element => {
               {((streamer?.displayName?.length > 23) && !desktopView) ? `${streamer?.displayName?.slice(0, 24)}...` : streamer?.displayName}
             </StreamerInfo>
             <ScoreDiv>
-              {/* <div className="count" data-count={streamer?.score} /> */}
               <ScoreText>{streamer?.score}</ScoreText>
               <SmallText>points</SmallText>
             </ScoreDiv>

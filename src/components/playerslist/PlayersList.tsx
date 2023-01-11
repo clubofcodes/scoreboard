@@ -20,6 +20,7 @@ const ListGroup = styled.ul`
   list-style-type: none;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 `;
 
 const List = styled.li`
@@ -34,7 +35,7 @@ const List = styled.li`
   }
   
   @media only screen and ${DeviceWidth.m}{
-    padding: 5px 10px;
+    padding: 8px 15px;
   }
 
   &:hover {

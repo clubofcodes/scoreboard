@@ -1,5 +1,5 @@
 // App's all colors list
-export const GlobolColors = {
+export const GlobalColors = {
     mainBg: '#363942',
     listBg: '#f7f4f6',
     listHoverBg: '#4a69dd',

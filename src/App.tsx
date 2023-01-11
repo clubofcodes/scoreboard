@@ -5,7 +5,7 @@ import React from "react";
 import styled, { ThemeProvider } from "styled-components";
 
 // Constant variables
-import { GlobolColors, DeviceWidth } from "utils/constants";
+import { GlobalColors, DeviceWidth } from "utils/constants";
 
 // Custom component
 import ScoresDashboard from "./components/scoreboard/ScoresDashboard";
@@ -28,7 +28,7 @@ const HeadingLabel = styled.h1`
 
 const App = (): JSX.Element => {
     return (
-        <ThemeProvider theme={{ colors: GlobolColors }}>
+        <ThemeProvider theme={{ colors: GlobalColors }}>
             <HeadingLabel>Scores Leaderboard</HeadingLabel>
             <ScoresDashboard />
         </ThemeProvider>

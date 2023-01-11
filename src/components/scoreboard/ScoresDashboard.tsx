@@ -9,7 +9,7 @@ import streamersData from "assets/data/streamers.json";
 
 // Utils and Global Constants
 import { StreamersTypes } from "utils/globalTypes";
-import { isEmpty } from "utils/constants";
+import { DeviceWidth, isEmpty } from "utils/constants";
 
 // Custom component to list the steamers
 import PlayersList from "components/playerslist/PlayersList";
@@ -18,6 +18,12 @@ import PlayersList from "components/playerslist/PlayersList";
 const DashboardContainer = styled.div`
   border-radius: 14px;
   background-color: ${props => props.theme.colors.listBg};
+  max-width: 80%;
+  margin: 0 auto;
+
+  @media only screen and ${DeviceWidth.m}{
+    max-width: 100%;
+  }
 `;
 // -------------------- Custom Style using styled-component --------------------
 

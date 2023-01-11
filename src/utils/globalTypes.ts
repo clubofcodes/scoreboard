@@ -1,5 +1,5 @@
 // Streamers JSON data types
-export interface StreamersType {
+export interface StreamersTypes {
     userID: string,
     displayName: string,
     picture: string,

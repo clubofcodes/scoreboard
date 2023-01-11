@@ -8,7 +8,7 @@ import styled from "styled-components";
 import streamersData from "assets/data/streamers.json";
 
 // Utils
-import { StreamersType } from "utils/globalTypes";
+import { StreamersTypes } from "utils/globalTypes";
 import { isEmpty } from "utils/constants";
 
 // Custom component to list the steamers
@@ -25,10 +25,10 @@ const DashboardContainer = styled.div`
 const ScoresDashboard = () => {
 
   // Constants
-  const updatedList: StreamersType[] = []; // to push the randomly updated score streamer with other streamers
+  const updatedList: StreamersTypes[] = []; // to push the randomly updated score streamer with other streamers
 
   // React state to store streamers data
-  const [streamersList, setStreamersList] = useState<StreamersType[]>([]);
+  const [streamersList, setStreamersList] = useState<StreamersTypes[]>([]);
 
   // To set streamersList state once JSON file is imported with data
   useEffect(() => {

@@ -1,4 +1,5 @@
 // React library and hooks API
+import useSystemInfo from "hooks/useSystemInfo";
 import React from "react";
 
 // styled-component library for designing components
@@ -6,7 +7,7 @@ import styled from "styled-components";
 import { GreyImgUrl, DeviceWidth } from "utils/constants";
 
 // Global Types
-import { StreamersType } from "utils/globalTypes";
+import { StreamersTypes } from "utils/globalTypes";
 
 // -------------------- Custom Style using styled-component --------------------
 const ListGroup = styled.ul`
@@ -146,7 +147,7 @@ const SmallText = styled.small`
 
 // Declaring type of props
 interface PlayersListProps {
-  data: StreamersType[];
+  data: StreamersTypes[];
 }
 
 // JSX function starts from here
@@ -155,6 +156,9 @@ const PlayersList = (props: PlayersListProps): JSX.Element => {
   // Destructuring of props
   const { data: streamersList } = props;
 
+  // Destructuring required variable from object return by custom hook.
+  let { desktopView } = useSystemInfo();
+
   return (
     <ListGroup>
       {streamersList?.sort((a, b) => a.score !== b.score ? b.score - a.score : a.score - b.score).map((streamer, index) => (
@@ -162,7 +166,7 @@ const PlayersList = (props: PlayersListProps): JSX.Element => {
           <StreamerInfo>
             <Badge id={`u-${index + 1}`}>{index + 1}</Badge>
             <Img src={streamer.picture || GreyImgUrl} />
-            {(streamer?.displayName?.split(" ").length > 3 && (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent))) ? `${streamer?.displayName?.split(" ", 2).join(" ")}...` : streamer?.displayName}
+            {((streamer?.displayName?.length > 23) && !desktopView) ? `${streamer?.displayName?.slice(0, 24)}...` : streamer?.displayName}
           </StreamerInfo>
           <ScoreText>
             {streamer?.score}

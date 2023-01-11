@@ -1,0 +1,231 @@
+// React library and hooks API
+import AnimationSlide from "components/animation/AnimationSlide";
+import useSystemInfo from "hooks/useSystemInfo";
+import React, { createRef, useEffect, useRef } from "react";
+
+// styled-component library for designing components
+import styled from "styled-components";
+import { GreyImgUrl, DeviceWidth } from "utils/constants";
+
+// Global Types
+import { StreamersTypes } from "utils/globalTypes";
+
+// -------------------- Custom Style using styled-component --------------------
+const ListGroup = styled.ul`
+  width: 100%;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+`;
+
+const List = styled.li`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid lightgray;
+  padding: 15px 20px;
+
+  &:last-child {
+    border-bottom: 1px solid transparent;
+  }
+  
+  @media only screen and ${DeviceWidth.m}{
+    padding: 5px 10px;
+  }
+
+  &:hover {
+    background-color: ${props => props.theme.colors.listHoverBg};
+    color: ${props => props.theme.colors.white};
+    &:first-child {
+      border-radius: 12px 12px 0 0;
+    }
+    &:last-child {
+      border-radius: 0 0 12px 12px;
+    }
+  }
+`;
+
+const StreamerInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 600;
+
+  @media only screen and ${DeviceWidth.m}{
+    font-size: 14px;
+    font-weight: 500;
+  }
+  @media only screen and ${DeviceWidth.xs}{
+    font-size: 12px;
+    font-weight: 400;
+  }
+`;
+
+const Badge = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 1px;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 600;
+  color: ${props => props.theme.colors.white};
+  background-color: ${props => props.theme.colors.badgeBg};
+
+  &#u-1 {
+    background-color: ${props => props.theme.colors.top1BadgeBg};
+  }
+  &#u-2 {
+    background-color: ${props => props.theme.colors.top2BadgeBg};
+  }
+  &#u-3 {
+    background-color: ${props => props.theme.colors.top3BadgeBg};
+  }
+
+  @media only screen and ${DeviceWidth.m}{
+    height: 16px;
+    width: 16px;
+    font-size: 8px;
+    font-weight: 500;
+  }
+  @media only screen and ${DeviceWidth.xs}{
+    height: 12px;
+    width: 12px;
+    font-size: 6px;
+    font-weight: 400;
+  }
+`;
+
+const Img = styled.img`
+  width: 35px;
+  height: 35px;
+  margin: 0 10px;
+  border: 3px solid ${props => props.theme.colors.white};
+  border-radius: 50%;
+  cursor: pointer;
+
+  @media only screen and ${DeviceWidth.m}{
+    height: 24px;
+    width: 24px;
+    margin: 0 8px;
+    border-width: 1px;
+  }
+  @media only screen and ${DeviceWidth.xs}{
+    height: 18px;
+    width: 18px;
+    margin: 0 4px;
+    border-width: 1px;
+  }  
+`;
+
+const ScoreDiv = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+
+  @media only screen and ${DeviceWidth.m}{
+    font-size: 14px;
+    font-weight: 500;
+  }
+  @media only screen and ${DeviceWidth.xs}{
+    font-size: 12px;
+    font-weight: 400;
+  }
+`;
+
+const ScoreText = styled.p`
+  margin: 0;
+`;
+
+const SmallText = styled.small`
+  margin-left: 4px;
+  color: ${props => props.theme.colors.smallText};
+
+  @media only screen and ${DeviceWidth.m}{
+    display: none;
+  }
+`;
+// -------------------- Custom Style using styled-component --------------------
+
+// Declaring type of props
+interface PlayersListProps {
+  data: StreamersTypes[];
+}
+
+// JSX function starts from here
+const PlayersList = (props: PlayersListProps): JSX.Element => {
+
+  // Destructuring of props
+  const { data: streamersList } = props;
+
+  // Destructuring required variable from object return by custom hook.
+  let { desktopView } = useSystemInfo();
+
+  // useEffect(() => {
+  //   const countEl = document.querySelectorAll('.count');
+
+  //   countEl.forEach((item:any, i) => {
+  //     const fixedItemCount = item.getAttribute('data-count');
+
+  //    item.innerHTML = fixedItemCount;
+
+  //   })
+
+  //   console.log('inc', 'w');
+
+  // }, [streamersList])
+
+  // useEffect(() => {
+  //   const counters = document.querySelectorAll(".count");
+  //   const speed = 200;
+
+  //   if (streamersList.length > 0) {
+  //     counters.forEach((counter) => {
+  //       const updateCount = () => {
+  //         const target: any = counter.getAttribute("data-count");
+  //         const count: any = counter.innerHTML;
+  //         const increment = Math.trunc(target / speed);
+  //         // console.log(increment);
+  //         console.log(target, 'target');
+
+  //         if (parseInt(count) < parseInt(target)) {
+  //           counter.innerHTML = count + increment;
+  //           setTimeout(updateCount, 1);
+  //         } else {
+  //           count.innerHTML = target;
+  //         }
+  //       };
+  //       updateCount();
+  //     });
+  //   }
+
+  // }, [streamersList]);
+
+  return (
+    <ListGroup>
+      <AnimationSlide>
+        {streamersList?.sort((a, b) => a.score !== b.score ? b.score - a.score : a.score - b.score).map((streamer, index) => (
+          <List key={streamer?.userID || index} id={streamer?.userID} ref={createRef()}>
+            <StreamerInfo>
+              <Badge id={`u-${index + 1}`}>{index + 1}</Badge>
+              <Img src={streamer.picture || GreyImgUrl} />
+              {((streamer?.displayName?.length > 23) && !desktopView) ? `${streamer?.displayName?.slice(0, 24)}...` : streamer?.displayName}
+            </StreamerInfo>
+            <ScoreDiv>
+              {/* <div className="count" data-count={streamer?.score} /> */}
+              <ScoreText>{streamer?.score}</ScoreText>
+              <SmallText>points</SmallText>
+            </ScoreDiv>
+          </List>
+        ))}
+      </AnimationSlide>
+    </ListGroup>
+  );
+};
+
+export default PlayersList;

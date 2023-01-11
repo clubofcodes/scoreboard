@@ -1,6 +1,7 @@
 // React library and hooks API
+import AnimationSlide from "components/animation/AnimationSlide";
 import useSystemInfo from "hooks/useSystemInfo";
-import React from "react";
+import React, { createRef, useEffect, useRef } from "react";
 
 // styled-component library for designing components
 import styled from "styled-components";
@@ -120,7 +121,9 @@ const Img = styled.img`
   }  
 `;
 
-const ScoreText = styled.p`
+const ScoreDiv = styled.div`
+  display: flex;
+  align-items: center;
   margin: 0;
   font-size: 18px;
   font-weight: 600;
@@ -133,6 +136,10 @@ const ScoreText = styled.p`
     font-size: 12px;
     font-weight: 400;
   }
+`;
+
+const ScoreText = styled.p`
+  margin: 0;
 `;
 
 const SmallText = styled.small`
@@ -159,21 +166,64 @@ const PlayersList = (props: PlayersListProps): JSX.Element => {
   // Destructuring required variable from object return by custom hook.
   let { desktopView } = useSystemInfo();
 
+  // useEffect(() => {
+  //   const countEl = document.querySelectorAll('.count');
+
+  //   countEl.forEach((item:any, i) => {
+  //     const fixedItemCount = item.getAttribute('data-count');
+
+  //    item.innerHTML = fixedItemCount;
+
+  //   })
+
+  //   console.log('inc', 'w');
+
+  // }, [streamersList])
+
+  // useEffect(() => {
+  //   const counters = document.querySelectorAll(".count");
+  //   const speed = 200;
+
+  //   if (streamersList.length > 0) {
+  //     counters.forEach((counter) => {
+  //       const updateCount = () => {
+  //         const target: any = counter.getAttribute("data-count");
+  //         const count: any = counter.innerHTML;
+  //         const increment = Math.trunc(target / speed);
+  //         // console.log(increment);
+  //         console.log(target, 'target');
+
+  //         if (parseInt(count) < parseInt(target)) {
+  //           counter.innerHTML = count + increment;
+  //           setTimeout(updateCount, 1);
+  //         } else {
+  //           count.innerHTML = target;
+  //         }
+  //       };
+  //       updateCount();
+  //     });
+  //   }
+
+  // }, [streamersList]);
+
   return (
     <ListGroup>
-      {streamersList?.sort((a, b) => a.score !== b.score ? b.score - a.score : a.score - b.score).map((streamer, index) => (
-        <List key={streamer?.userID || index}>
-          <StreamerInfo>
-            <Badge id={`u-${index + 1}`}>{index + 1}</Badge>
-            <Img src={streamer.picture || GreyImgUrl} />
-            {((streamer?.displayName?.length > 23) && !desktopView) ? `${streamer?.displayName?.slice(0, 24)}...` : streamer?.displayName}
-          </StreamerInfo>
-          <ScoreText>
-            {streamer?.score}
-            <SmallText>points</SmallText>
-          </ScoreText>
-        </List>
-      ))}
+      <AnimationSlide>
+        {streamersList?.sort((a, b) => a.score !== b.score ? b.score - a.score : a.score - b.score).map((streamer, index) => (
+          <List key={streamer?.userID || index} id={streamer?.userID} ref={createRef()}>
+            <StreamerInfo>
+              <Badge id={`u-${index + 1}`}>{index + 1}</Badge>
+              <Img src={streamer.picture || GreyImgUrl} />
+              {((streamer?.displayName?.length > 23) && !desktopView) ? `${streamer?.displayName?.slice(0, 24)}...` : streamer?.displayName}
+            </StreamerInfo>
+            <ScoreDiv>
+              {/* <div className="count" data-count={streamer?.score} /> */}
+              <ScoreText>{streamer?.score}</ScoreText>
+              <SmallText>points</SmallText>
+            </ScoreDiv>
+          </List>
+        ))}
+      </AnimationSlide>
     </ListGroup>
   );
 };

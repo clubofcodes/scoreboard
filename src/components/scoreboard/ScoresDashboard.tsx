@@ -38,10 +38,13 @@ const ScoresDashboard = () => {
   // To set streamersList state after each sec with randomly updated score
   useEffect(() => {
 
+    let scoreUpdateTimer: any;
+
     // To update streamersList data of only randomly player whose score is updated and rest of all as it is.
     // Will update score of 1 player at a time and every sec the same.
-    let scoreUpdateTimer = setTimeout(() => {
-      if (streamersList.length > 0) {
+    if (streamersList.length > 0) {
+
+      scoreUpdateTimer = setTimeout(() => {
 
         const randomIndex = Math.floor(Math.random() * streamersList.length); // to generate random index as per JSON data length
 
@@ -49,7 +52,7 @@ const ScoresDashboard = () => {
         // And push into another array including not updated players data.
         streamersList?.map((item, index) => {
           if (index + 1 === randomIndex) {
-            item.score = item.score + index + randomIndex * 100;
+            item.score = item.score + index + (randomIndex * 358);
           }
           updatedList.push(item);
           return item;
@@ -57,9 +60,10 @@ const ScoresDashboard = () => {
 
         // Set state with new array
         setStreamersList(updatedList);
-      }
-    }, 1000);
 
+      }, 1000);
+
+    }
     // this will clear Timeout when component unmount like in willComponentUnmount
     return () => {
       clearTimeout(scoreUpdateTimer);

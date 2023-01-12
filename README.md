@@ -5,6 +5,8 @@ Scores leaderboard for live updates and make the scores increase randomly.
 The scores of each player will increase every second, and the leaderboard will automatically change the position of the players according to the scores of each player.
 Scores is listed with the player information and animation is applied to list up the player if score is increased from above player.
 
+#### DEMO: [Players LeaderBoard](https://scoreboard-rahuljinexture.vercel.app/)
+
 ## Feature
 Scores Leaderboard: Pass any JSON data of same type and you can see the list of the scorers
 Functional components and Typescript: To maintain the consistency of the project and standards

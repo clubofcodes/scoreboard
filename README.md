@@ -14,7 +14,7 @@ Jest: To write unit test cases
 ## Pre-Requisite
 - Any OS
 - npm and create-react-app installed
-- VS code
+- VS code (Recommended)
 - Chrome browser or any
 
 Library used in this projects are listed below:

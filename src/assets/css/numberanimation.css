@@ -2,10 +2,12 @@
   display: inline-block;
   height: 30px;
   line-height: 30px;
-  /* text-shadow: 0 0 2px #fff; */
-  font-weight: bold;
+  font-weight: 600;
   white-space: normal;
   font-size: 18px;
+}
+.scoreValue:hover {
+  color: white;
 }
 
 .scoreValue > div {
@@ -18,27 +20,34 @@
   display: inline-block;
   width: 9px;
   height: 100%;
-  /* margin: 0 0.1em; */
-  /* border-radius: 8px; */
   text-align: center;
-  /* background: white; */
   overflow: hidden;
+  font-weight: 600;
+}
+
+@media only screen and (max-width: 600px) {
+  .scoreValue > div > b {
+    width: 7px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .scoreValue > div > b {
+    width: 6px;
+    font-size: 12px;
+    font-weight: 400;
+  }
 }
 
 .scoreValue > div > b::before {
   content: " 0 1 2 3 4 5 6 7 8 9 ";
   display: block;
   word-break: break-all;
-  -webkit-transition: 0.5s cubic-bezier(0.75, 0.15, 0.6, 1.15),
-    text-shadow 150ms;
-  transition: 0.5s cubic-bezier(0.75, 0.15, 0.6, 1.15), text-shadow 150ms;
+  -webkit-transition: 0.5s ease-in-out, color 0s;
+  transition: 0.5s ease-in-out, color 0s;
 }
-
-/* .scoreValue > div > b.blur {
-  text-shadow: 2px 1px 3px rgba(0, 0, 0, 0.2),
-    0 0.1em 2px rgba(255, 255, 255, 0.6), 0 0.3em 3px rgba(255, 255, 255, 0.3),
-    0 -0.1em 2px rgba(255, 255, 255, 0.6), 0 -0.3em 3px rgba(255, 255, 255, 0.3);
-} */
 
 .scoreValue > div > b[data-value="1"]::before {
   margin-top: -30px;
@@ -66,25 +75,4 @@
 }
 .scoreValue > div > b[data-value="9"]::before {
   margin-top: -270px;
-}
-
-/* .scoreValue > div:nth-last-child(3n)::before {
-  content: ",";
-  display: inline;
-  font-size: 1.1em;
-  opacity: 0.6;
-  color: white;
-} */
-
-/* .scoreValue {
-  overflow: hidden;
-  padding: 0.4em;
-  text-align: center;
-
-  border-radius: 16px;
-  background: white;
-} */
-
-.scoreValue b {
-  color: black;
 }

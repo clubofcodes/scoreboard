@@ -57,8 +57,13 @@ const ScoresDashboard = () => {
         // Find the random index object from list of players and update score only of that.
         // And push into another array including not updated players data.
         streamersList?.map((item, index) => {
+          item.updated = false;
           if (index + 1 === randomIndex) {
+
             item.score = item.score + index + (randomIndex * 358);
+            console.log(item.score, 'score');
+
+            item.updated = true;
           }
           updatedList.push(item);
           return item;
@@ -67,7 +72,7 @@ const ScoresDashboard = () => {
         // Set state with new array
         setStreamersList(updatedList);
 
-      }, 1000);
+      }, 3000);
 
     }
     // this will clear Timeout when component unmount like in willComponentUnmount

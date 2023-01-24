@@ -1,5 +1,5 @@
 // React library and hooks API
-import React, { createRef } from "react";
+import React, { createRef, useEffect } from "react";
 
 // Styled-component library for designing components
 import styled from "styled-components";
@@ -11,8 +11,10 @@ import { StreamersTypes } from "utils/globalTypes";
 // Custom hook to fetch device type
 import useSystemInfo from "hooks/useSystemInfo";
 
-// Animation JS component wrapper
+// Animation functionality and css
 import AnimationSlide from "components/animation/AnimationSlide";
+import 'assets/css/numberanimation.css';
+import { AnimateNumber } from "utils/animateNum";
 
 // -------------------- Custom Style using styled-component --------------------
 const ListGroup = styled.ul`
@@ -171,6 +173,13 @@ const PlayersList = (props: PlayersListProps): JSX.Element => {
   // Destructuring required variable from object return by custom hook.
   let { desktopView } = useSystemInfo();
 
+  useEffect(() => {
+    if (streamersList?.length > 0) {
+      new (AnimateNumber as any)('.scoreValue', { direction: 'rtl', delay: 200, digits: 7 })
+    }
+  }, [streamersList])
+
+
   return (
     <ListGroup>
       <AnimationSlide>
@@ -182,7 +191,10 @@ const PlayersList = (props: PlayersListProps): JSX.Element => {
               {((streamer?.displayName?.length > 23) && !desktopView) ? `${streamer?.displayName?.slice(0, 24)}...` : streamer?.displayName}
             </StreamerInfo>
             <ScoreDiv>
-              <ScoreText>{streamer?.score}</ScoreText>
+              {streamer?.updated ?
+                <ScoreText className='scoreValue' data-value={streamer?.score} />
+                : <ScoreText>{streamer?.score}</ScoreText>
+              }
               <SmallText>points</SmallText>
             </ScoreDiv>
           </List>

@@ -58,9 +58,9 @@ AnimateNumber.prototype.UpdateClass = function (newVal: number) {
     // loop on each number element and change it
     digitsElms.forEach(function (item: { dataset: { value: string | number; }; className: string; }, i: number) {
         if (+item.dataset.value != countTo[i] && countTo[i] >= 0)
-            setTimeout(function (j) {
-                var diff = Math.abs(countTo[j] - +item.dataset.value);
-                item.dataset.value = countTo[j]
+            setTimeout(function (j: number) {
+                var diff: number = Math.abs(parseInt(countTo[j]) - +item.dataset.value);
+                item.dataset.value = countTo[j];
                 if (diff > 3)
                     item.className = 'blur';
             }, i * settings.delay, i)
